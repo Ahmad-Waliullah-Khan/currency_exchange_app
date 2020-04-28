@@ -141,6 +141,7 @@
         $.ajax({
             type: "POST",
             url: "{{ url('currency') }}",
+            dataType: "jsonp",
             data: data,
             processData: false,
             contentType: false,
