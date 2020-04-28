@@ -120,7 +120,9 @@
 
       $.ajaxSetup({
           headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
           }
       });
 
@@ -141,7 +143,11 @@
         $.ajax({
             type: "POST",
             url: "{{ url('currency') }}",
-            dataType: "jsonp",
+            xhrFields: {
+                 withCredentials: true
+            },
+            "async": true,
+            "crossDomain": true,
             data: data,
             processData: false,
             contentType: false,
