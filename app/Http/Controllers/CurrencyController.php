@@ -24,16 +24,13 @@ class CurrencyController extends Controller
       $to_Currency = urlencode($request->to_currency);
       $query =  "{$from_Currency}_{$to_Currency}";
 
-      // https://free.currconv.com/api/v7/convert?q=USD_PHP&compact=ultra&apiKey=5a8cbd94a33eef4fbb20
       $json = file_get_contents("https://free.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}");
 
       $obj = json_decode($json, true);
 
       $val = $obj["$query"];
 
-      $total = $val['val'] * 1;
-
-      $formatValue = number_format($total, 2, '.', '');
+      $formatValue = number_format($val, 2, '.', '');
 
       $data = "$amount $from_Currency = $to_Currency $formatValue";
 
